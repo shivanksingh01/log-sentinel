@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\MICROSERVICES\\KaviraqValut\\Log Sentinel\\logs\\.82f1ee74c8b5321f133f19636e99a0c03bc90fa9-audit.json",
+    "files": [
+        {
+            "date": 1775503435917,
+            "name": "C:\\MICROSERVICES\\KaviraqValut\\Log Sentinel\\logs\\critical-2026-04-07-00.log",
+            "hash": "2fa80e86c466d960af90129a7fb72e08baf6b709d6bb692ae34c9da20d86cecd"
+        },
+        {
+            "date": 1775503889307,
+            "name": "C:\\MICROSERVICES\\KaviraqValut\\Log Sentinel\\logs\\critical-2026-04-07-01.log",
+            "hash": "1d2cda2efcc2559956224c87649cfc7e1ceabdeb57f389ed5ae9740c50c9fbc0"
+        }
+    ],
+    "hashType": "sha256"
+}

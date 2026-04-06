@@ -6,9 +6,14 @@
     "auditLog": "C:\\MICROSERVICES\\KaviraqValut\\Log Sentinel\\logs\\.e5e2dee86d1ae747f9c5f1b6582b157a7ae33e0c-audit.json",
     "files": [
         {
-            "date": 1775503100748,
+            "date": 1775503435913,
             "name": "C:\\MICROSERVICES\\KaviraqValut\\Log Sentinel\\logs\\error-2026-04-07-00.log",
-            "hash": "245b7492d0030dd139d9fca1bf56339890dab32ca26585074d33310037a4be72"
+            "hash": "1d886dbc82b4acc34d9d50935198128aecf4b895bfbf8a626813d467eaf1487f"
+        },
+        {
+            "date": 1775503889300,
+            "name": "C:\\MICROSERVICES\\KaviraqValut\\Log Sentinel\\logs\\error-2026-04-07-01.log",
+            "hash": "f4aa6f9ff4595c547a1a98504acc97a874ac860895fde4ff57b779fc64112719"
         }
     ],
     "hashType": "sha256"

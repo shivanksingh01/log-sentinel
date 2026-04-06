@@ -22,7 +22,8 @@ const SQLI_PATTERNS = [
 
 const evaluate = (event, stateService) => {
     if (!event.path || !event.ip) return null;
-    if (!['GET', 'POST', 'PUT', 'DELETE'].includes(event.method)) return null;
+    // Allow UNKNOWN to support unstructured generic logs from volume mounts
+    if (!['GET', 'POST', 'PUT', 'DELETE', 'UNKNOWN'].includes(event.method)) return null;
 
     const { cooldownSec } = config.sqliProbe;
     const pathDecoded = decodeURIComponent(event.path);

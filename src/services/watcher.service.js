@@ -14,17 +14,31 @@ const debounceTimers = {};
 const DEBOUNCE_MS = 100;
 
 /**
- * Check if a filename is a valid application log file that should be parsed
+ * Check if a filename is a valid log file that should be parsed.
+ * Allows ANY file format/name EXCEPT internal system rotators and config files
+ * to prevent circular parsing and false positives.
  */
-const isValidAppLog = (filename) => {
-    return filename && filename.startsWith('app') && filename.endsWith('.log');
+const isValidLogFile = (filename) => {
+    if (!filename) return false;
+    // Exclude our own internal system logs
+    if (filename.startsWith('info-') || 
+        filename.startsWith('error-') || 
+        filename.startsWith('critical-') || 
+        filename.startsWith('system-')) return false;
+
+    // Exclude hidden files or known non-log text files
+    if (filename.startsWith('.')) return false;
+    if (filename.endsWith('.json')) return false;
+
+    // Anything else is treated as a potential log file
+    return true;
 };
 
 /**
  * Read new content from a log file starting at the tracked offset.
  * Splits new content into lines and sends each to the processor.
  *
- * @param {string} filename - The log filename (e.g. "app-2023-10-26-10.log")
+ * @param {string} filename - The log filename
  */
 const readNewLines = (filename) => {
     const filePath = path.join(LOG_DIR, filename);
@@ -50,7 +64,7 @@ const readNewLines = (filename) => {
 
     for (const line of lines) {
         if (line.trim().length > 0) {
-            logger.info(`[WATCHER] New log line detected: ${line.trim()}`);
+            logger.debug(`[WATCHER] New log line detected from ${filename}`);
             processRawLogLine(line);
         }
     }
@@ -71,12 +85,12 @@ const startWatcher = () => {
         fs.mkdirSync(LOG_DIR, { recursive: true });
     }
 
-    const existingFiles = fs.readdirSync(LOG_DIR).filter(isValidAppLog);
+    const existingFiles = fs.readdirSync(LOG_DIR).filter(isValidLogFile);
 
     if (env.LOG_SCAN_FROM_START) {
         // --- MOUNTED VOLUME MODE ---
         // Scan all existing log file content from byte 0
-        logger.info(`[WATCHER] LOG_SCAN_FROM_START=true — scanning existing log content in: ${LOG_DIR}`);
+        logger.info(`[WATCHER] LOG_SCAN_FROM_START=true — scanning existing log content for external logs in: ${LOG_DIR}`);
         for (const file of existingFiles) {
             setOffset(file, 0); // Start from beginning
         }
@@ -98,7 +112,7 @@ const startWatcher = () => {
 
     // Watch for new writes to the directory
     watcher = fs.watch(LOG_DIR, (eventType, filename) => {
-        if (!isValidAppLog(filename)) return;
+        if (!isValidLogFile(filename)) return;
         if (eventType !== 'change') return;
 
         if (debounceTimers[filename]) {
@@ -111,7 +125,7 @@ const startWatcher = () => {
         }, DEBOUNCE_MS);
     });
 
-    logger.info(`[WATCHER] Monitoring log directory: ${LOG_DIR}`);
+    logger.info(`[WATCHER] Monitoring log directory: ${LOG_DIR} for any incoming files.`);
 };
 
 /**
