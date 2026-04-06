@@ -15,6 +15,14 @@ const incrementParseErrors = () => {
     stats.parseErrors += 1;
 };
 
+const incrementAlertsCreated = () => {
+    stats.alertsCreated += 1;
+};
+
+const incrementAlertsSuppressed = () => {
+    stats.alertsSuppressed += 1;
+};
+
 const getStats = () => {
     return { ...stats };
 };
@@ -22,5 +30,7 @@ const getStats = () => {
 module.exports = {
     incrementLogsProcessed,
     incrementParseErrors,
+    incrementAlertsCreated,
+    incrementAlertsSuppressed,
     getStats,
 };

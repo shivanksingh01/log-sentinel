@@ -19,9 +19,9 @@ class StateService {
     addEvent(event) {
         if (!event || !event.timestamp) return;
 
-        const isFailedLogin = event.type === 'FAILED_LOGIN';
-        const isRequest = event.type === 'REQUEST';
-        const isSuccessLogin = event.type === 'LOGIN_SUCCESS';
+        const isFailedLogin = event.eventType === 'FAILED_LOGIN';
+        const isRequest = event.eventType === 'REQUEST';
+        const isSuccessLogin = event.eventType === 'LOGIN_SUCCESS';
 
         if (isFailedLogin) {
             if (event.ip) this._addToList(this.failedLoginsByIp, event.ip, event);

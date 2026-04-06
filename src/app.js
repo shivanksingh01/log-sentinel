@@ -14,6 +14,7 @@ const authRoutes = require('./routes/auth.routes');
 const productsRoutes = require('./routes/products.routes');
 const adminRoutes = require('./routes/admin.routes');
 const statsRoutes = require('./routes/stats.routes');
+const alertRoutes = require('./routes/alert.routes');
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/products', productsRoutes);
 app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/stats', statsRoutes);
+app.use('/api/v1/alerts', alertRoutes);
 
 // 404 Handler
 app.use((req, res) => {

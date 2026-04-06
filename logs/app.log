@@ -39,3 +39,15 @@
 2026-04-06T17:49:35.372Z event=LOGIN_SUCCESS ip=127.0.0.1 user=admin path=/auth/login status=200 method=POST
 2026-04-06T17:49:36.203Z event=LOGIN_SUCCESS ip=127.0.0.1 user=admin path=/auth/login status=200 method=POST
 2026-04-06T17:49:37.164Z event=LOGIN_SUCCESS ip=127.0.0.1 user=admin path=/auth/login status=200 method=POST
+2026-04-06T18:01:38.194Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:01:38.435Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:01:38.669Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:01:38.903Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:01:39.153Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:01:39.388Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:03:14.947Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:03:15.178Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:03:15.427Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:03:15.676Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:03:15.911Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:03:16.145Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
