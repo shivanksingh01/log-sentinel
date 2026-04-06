@@ -1,6 +1,7 @@
 const app = require('./app');
 const env = require('./config/env');
 const logger = require('./config/logger');
+const { startWatcher, stopWatcher } = require('./services/watcher.service');
 
 const LOG_SENTINEL_BANNER = `
   _                 ____             _   _            _ 
@@ -27,11 +28,15 @@ const startServer = async () => {
             
             console.table(startupInfo);
 
-            logger.info(`🚀 API running on port ${env.PORT}`);
+            logger.info(`API running on port ${env.PORT}`);
+
+            // Start the file watcher for /logs directory
+            startWatcher();
         });
 
         const gracefulShutdown = (signal) => {
             logger.warn(`${signal} received. Shutting down gracefully...`);
+            stopWatcher();
             server.close(() => {
                 logger.info('HTTP server closed');
                 process.exit(0);

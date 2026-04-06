@@ -1,0 +1,20 @@
+2026-04-06T17:22:30.115Z event=REQUEST ip=127.0.0.1 path=/products status=200 method=GET
+2026-04-06T17:22:30.409Z event=REQUEST ip=127.0.0.1 path=/admin status=403 method=GET
+2026-04-06T17:23:32.330Z event=LOGIN_SUCCESS ip=127.0.0.1 user=admin path=/auth/login status=200 method=POST
+2026-04-06T17:23:49.546Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T17:26:19.999Z event=REQUEST ip=127.0.0.1 path=/products status=200 method=GET
+2026-04-06T17:26:58.399Z event=REQUEST ip=127.0.0.1 path=/admin status=403 method=GET
+2026-04-06T17:29:34.021Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T17:33:29.735Z event=LOGIN_SUCCESS ip=127.0.0.1 user=admin path=/auth/login status=200 method=POST
+2026-04-06T17:33:32.643Z event=LOGIN_SUCCESS ip=127.0.0.1 user=admin path=/auth/login status=200 method=POST
+2026-04-06T17:33:34.090Z event=LOGIN_SUCCESS ip=127.0.0.1 user=admin path=/auth/login status=200 method=POST
+2026-04-06T17:33:35.337Z event=LOGIN_SUCCESS ip=127.0.0.1 user=admin path=/auth/login status=200 method=POST
+2026-04-06T17:33:42.224Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T17:33:43.394Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T17:33:44.596Z event=FAILED_LOGIN ip=127.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T17:33:47.221Z event=REQUEST ip=127.0.0.1 path=/admin status=403 method=GET
+2026-04-06T17:33:48.204Z event=REQUEST ip=127.0.0.1 path=/admin status=403 method=GET
+2026-04-06T17:33:49.288Z event=REQUEST ip=127.0.0.1 path=/admin status=403 method=GET
+2026-04-06T17:33:50.329Z event=REQUEST ip=127.0.0.1 path=/admin status=403 method=GET
+2026-04-06T17:33:53.376Z event=REQUEST ip=127.0.0.1 path=/products status=200 method=GET
+2026-04-06T17:33:54.571Z event=REQUEST ip=127.0.0.1 path=/products status=200 method=GET

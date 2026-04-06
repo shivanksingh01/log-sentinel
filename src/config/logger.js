@@ -16,7 +16,7 @@ const logger = createLogger({
                 })
             )
     ),
-    defaultMeta: { service: 'backend-boilerplate' },
+    defaultMeta: { service: 'log-sentinel' },
     transports: [
         new transports.Console(),
     ],

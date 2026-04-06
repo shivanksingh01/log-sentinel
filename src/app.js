@@ -10,6 +10,9 @@ const errorHandler = require('./middlewares/errorHandler');
 
 // Routes
 const healthRoutes = require('./routes/health.routes');
+const authRoutes = require('./routes/auth.routes');
+const productsRoutes = require('./routes/products.routes');
+const adminRoutes = require('./routes/admin.routes');
 
 const app = express();
 
@@ -38,6 +41,9 @@ if (!env.isProd) {
 
 // Sub-router Registration
 app.use('/api/v1/health', healthRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/products', productsRoutes);
+app.use('/api/v1/admin', adminRoutes);
 
 // 404 Handler
 app.use((req, res) => {
