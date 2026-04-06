@@ -1,9 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const logger = require('../config/logger');
+const env = require('../config/env');
 const { getOffset, setOffset } = require('../utils/fileOffsetStore');
 const { processRawLogLine } = require('./logProcessor.service');
-const { LOG_DIR } = require('./logWriter.service');
+
+const LOG_DIR = env.LOG_DIR;
 
 let watcher = null;
 
@@ -12,40 +14,37 @@ const debounceTimers = {};
 const DEBOUNCE_MS = 100;
 
 /**
+ * Check if a filename is a valid application log file that should be parsed
+ */
+const isValidAppLog = (filename) => {
+    return filename && filename.startsWith('app') && filename.endsWith('.log');
+};
+
+/**
  * Read new content from a log file starting at the tracked offset.
  * Splits new content into lines and sends each to the processor.
- * 
- * @param {string} filename - The log filename (e.g. "app.log")
+ *
+ * @param {string} filename - The log filename (e.g. "app-2023-10-26-10.log")
  */
 const readNewLines = (filename) => {
     const filePath = path.join(LOG_DIR, filename);
 
-    // Ensure the file still exists
-    if (!fs.existsSync(filePath)) {
-        return;
-    }
+    if (!fs.existsSync(filePath)) return;
 
     const stat = fs.statSync(filePath);
     const currentSize = stat.size;
     const lastOffset = getOffset(filename);
 
-    // No new data
-    if (currentSize <= lastOffset) {
-        return;
-    }
+    if (currentSize <= lastOffset) return; // No new data
 
-    // Read only the new bytes
     const bytesToRead = currentSize - lastOffset;
     const buffer = Buffer.alloc(bytesToRead);
     const fd = fs.openSync(filePath, 'r');
-
     fs.readSync(fd, buffer, 0, bytesToRead, lastOffset);
     fs.closeSync(fd);
 
-    // Update offset
     setOffset(filename, currentSize);
 
-    // Split into individual lines and process each
     const content = buffer.toString('utf-8');
     const lines = content.split('\n');
 
@@ -58,35 +57,50 @@ const readNewLines = (filename) => {
 };
 
 /**
- * Start the file watcher on the /logs directory.
- * Watches for file changes and reads new content using offsets.
+ * Start the file watcher on the LOG_DIR directory.
+ *
+ * Startup behavior:
+ * - LOG_SCAN_FROM_START=true (or running in Docker with /logs mounted):
+ *     Offset starts at 0 → entire existing file content is scanned immediately.
+ *     This is the key behavior for `docker run -v $(pwd)/logs:/logs`.
+ * - LOG_SCAN_FROM_START=false (default local dev):
+ *     Offset starts at current EOF → only new lines added after startup are processed.
  */
 const startWatcher = () => {
-    // Ensure the log directory exists
     if (!fs.existsSync(LOG_DIR)) {
         fs.mkdirSync(LOG_DIR, { recursive: true });
     }
 
-    // Initialize offsets for existing files (start from end to skip old data)
-    const existingFiles = fs.readdirSync(LOG_DIR).filter(f => f.endsWith('.log'));
-    for (const file of existingFiles) {
-        const filePath = path.join(LOG_DIR, file);
-        const stat = fs.statSync(filePath);
-        setOffset(file, stat.size);
-        logger.debug(`[WATCHER] Initialized offset for ${file}: ${stat.size} bytes`);
+    const existingFiles = fs.readdirSync(LOG_DIR).filter(isValidAppLog);
+
+    if (env.LOG_SCAN_FROM_START) {
+        // --- MOUNTED VOLUME MODE ---
+        // Scan all existing log file content from byte 0
+        logger.info(`[WATCHER] LOG_SCAN_FROM_START=true — scanning existing log content in: ${LOG_DIR}`);
+        for (const file of existingFiles) {
+            setOffset(file, 0); // Start from beginning
+        }
+        // Process all existing lines immediately before watching for new ones
+        for (const file of existingFiles) {
+            logger.info(`[WATCHER] Processing existing content of: ${file}`);
+            readNewLines(file);
+        }
+    } else {
+        // --- LOCAL DEV MODE ---
+        // Skip existing content, only tail new lines
+        for (const file of existingFiles) {
+            const filePath = path.join(LOG_DIR, file);
+            const stat = fs.statSync(filePath);
+            setOffset(file, stat.size);
+            logger.debug(`[WATCHER] Initialized offset for ${file}: ${stat.size} bytes (tail mode)`);
+        }
     }
 
+    // Watch for new writes to the directory
     watcher = fs.watch(LOG_DIR, (eventType, filename) => {
-        // Only care about log files that changed
-        if (!filename || !filename.endsWith('.log')) {
-            return;
-        }
+        if (!isValidAppLog(filename)) return;
+        if (eventType !== 'change') return;
 
-        if (eventType !== 'change') {
-            return;
-        }
-
-        // Debounce rapid events for the same file
         if (debounceTimers[filename]) {
             clearTimeout(debounceTimers[filename]);
         }
@@ -109,15 +123,10 @@ const stopWatcher = () => {
         watcher = null;
         logger.info('[WATCHER] File watcher stopped');
     }
-
-    // Clear any pending debounce timers
     for (const key of Object.keys(debounceTimers)) {
         clearTimeout(debounceTimers[key]);
         delete debounceTimers[key];
     }
 };
 
-module.exports = {
-    startWatcher,
-    stopWatcher,
-};
+module.exports = { startWatcher, stopWatcher };

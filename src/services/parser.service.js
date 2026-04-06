@@ -2,55 +2,58 @@ const LogEvent = require('../models/Event');
 const logger = require('../config/logger');
 
 /**
- * Parses a raw log line into a LogEvent object.
- * 
- * @param {string} line - Raw log line
- * @returns {LogEvent|null} - Parsed event or null if malformed
+ * Parses a raw log line into a normalized LogEvent.
+ *
+ * Expected format (key=value space-delimited):
+ *   <ISO8601_timestamp> event=<TYPE> ip=<IP> [user=<USER>] path=<PATH> status=<STATUS> method=<METHOD>
+ *
+ * Design decisions:
+ * - Lenient parsing: missing optional fields (user) are allowed.
+ * - path field values may contain URL-encoded characters.
+ * - Lines that are entirely unparseable return null and increment parse error stats.
  */
 const parseLogLine = (line) => {
     try {
         if (!line || typeof line !== 'string') return null;
+        const trimmed = line.trim();
+        if (trimmed.length === 0) return null;
 
-        const parts = line.trim().split(' ');
-        if (parts.length < 2) return null;
+        const spaceIdx = trimmed.indexOf(' ');
+        if (spaceIdx === -1) return null;
 
-        const timestamp = parts[0];
-        
-        const kvPairs = parts.slice(1);
+        const timestamp = trimmed.substring(0, spaceIdx);
+        const rest = trimmed.substring(spaceIdx + 1);
+
+        // Parse key=value pairs — values may include url-encoded chars but not spaces
         const data = {};
-
-        kvPairs.forEach(pair => {
-            const [key, value] = pair.split('=');
-            if (key && value !== undefined) {
-                data[key] = value;
-            }
-        });
-
-        // Validate required fields
-        if (!timestamp || !data.event || !data.ip || !data.path || !data.status || !data.method) {
-            return null; // Missing required fields
+        const KEY_VAL_RE = /(\w+)=([^\s]+)/g;
+        let match;
+        while ((match = KEY_VAL_RE.exec(rest)) !== null) {
+            data[match[1]] = match[2];
         }
 
-        const statusNumber = parseInt(data.status, 10);
-        if (isNaN(statusNumber)) {
+        // Validate minimum required fields
+        if (!timestamp || !data.event || !data.ip) {
             return null;
         }
 
+        const statusNumber = data.status ? parseInt(data.status, 10) : 0;
+
         const event = new LogEvent({
-            timestamp: timestamp,
+            timestamp,
             eventType: data.event,
             ip: data.ip,
-            user: data.user,
-            path: data.path,
-            status: statusNumber,
-            method: data.method,
-            raw: line.trim()
+            user: data.user || null,
+            path: data.path || '/',
+            status: isNaN(statusNumber) ? 0 : statusNumber,
+            method: data.method || 'GET',
+            raw: trimmed
         });
 
         return event;
 
     } catch (error) {
-        logger.warn(`[PARSER][ERROR] Failed to parse line due to exception: ${error.message}`);
+        logger.warn(`[PARSER][ERROR] Exception parsing line: ${error.message}`);
         return null;
     }
 };

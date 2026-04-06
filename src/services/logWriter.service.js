@@ -1,9 +1,11 @@
 const fs = require('fs');
 const path = require('path');
+const { createLogger, transports, format } = require('winston');
+const DailyRotateFile = require('winston-daily-rotate-file');
 const logger = require('../config/logger');
+const env = require('../config/env');
 
-const LOG_DIR = path.resolve(process.cwd(), 'logs');
-const LOG_FILE = path.join(LOG_DIR, 'app.log');
+const LOG_DIR = env.LOG_DIR;
 
 /**
  * Ensure /logs directory exists
@@ -18,8 +20,35 @@ const ensureLogDir = () => {
 // Initialize on load
 ensureLogDir();
 
+// Setup a separate winston logger precisely for raw application events.
+// It will write exactly the string we give it, with no extra JSON overhead.
+const rawFormatter = format.printf(({ message }) => {
+    return message;
+});
+
+const appLogTransport = new DailyRotateFile({
+    filename: path.join(LOG_DIR, 'app-%DATE%.log'),
+    datePattern: 'YYYY-MM-DD-HH', // Hourly rotation
+    zippedArchive: true,
+    maxSize: '20m', // Rotate if file exceeds 20MB even within the hour
+    maxFiles: '14d', // Keep logs for 14 days
+});
+
+// We want to catch daily-rotate-file events if possible, but keeping it simple is best.
+appLogTransport.on('rotate', (oldFilename, newFilename) => {
+    logger.info(`[LOG_WRITER] Rotated application log from ${oldFilename} to ${newFilename}`);
+});
+
+const appLogger = createLogger({
+    level: 'info',
+    format: rawFormatter,
+    transports: [
+        appLogTransport
+    ]
+});
+
 /**
- * Write a structured log line to /logs/app.log
+ * Write a structured log line to rotated hourly log files.
  * 
  * @param {Object} params
  * @param {string} params.event      - Event type (e.g. FAILED_LOGIN, LOGIN_SUCCESS, REQUEST)
@@ -40,16 +69,11 @@ const writeLog = ({ event, ip, user, path: reqPath, status, method }) => {
 
     logLine += ` path=${reqPath} status=${status} method=${method}`;
 
-    // Append to file with newline
-    try {
-        fs.appendFileSync(LOG_FILE, logLine + '\n', 'utf-8');
-    } catch (err) {
-        logger.error(`[LOG_WRITER] Failed to write log: ${err.message}`);
-    }
+    // Write raw message
+    appLogger.info(logLine);
 };
 
 module.exports = {
     writeLog,
     LOG_DIR,
-    LOG_FILE,
 };
