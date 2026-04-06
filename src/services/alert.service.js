@@ -1,6 +1,7 @@
 const Alert = require('../models/Alert');
 const logger = require('../config/logger');
 const statsService = require('./stats.service');
+const sseService = require('./sse.service');
 
 class AlertService {
     constructor() {
@@ -55,6 +56,9 @@ class AlertService {
         
         logger.warn(logMsg);
 
+        // Broadcast alert live via SSE
+        sseService.broadcastAlert(alert);
+
         return alert;
     }
 
@@ -73,8 +77,20 @@ class AlertService {
         return timeSinceLastAlert < cooldownSeconds;
     }
 
-    getAllAlerts() {
-        return this.alerts;
+    getAllAlerts(filters = {}) {
+        let filteredAlerts = this.alerts;
+        
+        if (filters.severity) {
+            filteredAlerts = filteredAlerts.filter(a => a.severity === filters.severity);
+        }
+        if (filters.type) {
+            filteredAlerts = filteredAlerts.filter(a => a.type === filters.type);
+        }
+        if (filters.limit) {
+            filteredAlerts = filteredAlerts.slice(0, filters.limit);
+        }
+        
+        return filteredAlerts;
     }
 
     getLatestAlerts(limit = 10) {

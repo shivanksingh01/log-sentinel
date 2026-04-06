@@ -1,12 +1,35 @@
 const alertService = require('../services/alert.service');
+const sseService = require('../services/sse.service');
 const ApiResponse = require('../utils/ApiResponse');
 
 /**
  * Get all alerts
  */
 const getAllAlerts = (req, res) => {
-    const alerts = alertService.getAllAlerts();
+    const filters = {
+        severity: req.query.severity,
+        type: req.query.type,
+        limit: req.query.limit ? parseInt(req.query.limit) : undefined
+    };
+    const alerts = alertService.getAllAlerts(filters);
     return res.status(200).json(alerts);
+};
+
+/**
+ * Stream alerts in real time using SSE
+ */
+const streamAlerts = (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.flushHeaders();
+
+    const clientId = `client_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+    sseService.addClient(clientId, res);
+
+    req.on('close', () => {
+        sseService.removeClient(clientId);
+    });
 };
 
 /**
@@ -28,6 +51,7 @@ const getAlertSummary = (req, res) => {
 
 module.exports = {
     getAllAlerts,
+    streamAlerts,
     getLatestAlerts,
     getAlertSummary,
 };

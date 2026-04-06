@@ -9,6 +9,12 @@ const alertController = require('../controllers/alert.controller');
 router.get('/', alertController.getAllAlerts);
 
 /**
+ * @route   GET /api/v1/alerts/stream
+ * @desc    Stream alerts in real time setup via SSE
+ */
+router.get('/stream', alertController.streamAlerts);
+
+/**
  * @route   GET /api/v1/alerts/latest
  * @desc    Get latest alerts
  */
