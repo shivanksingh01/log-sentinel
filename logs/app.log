@@ -139,3 +139,135 @@
 2026-04-06T18:40:40.930Z event=FAILED_LOGIN ip=127.0.0.1 user=admina path=/auth/login status=401 method=POST
 2026-04-06T18:40:42.027Z event=FAILED_LOGIN ip=127.0.0.1 user=admina path=/auth/login status=401 method=POST
 2026-04-06T18:40:43.193Z event=FAILED_LOGIN ip=127.0.0.1 user=admina path=/auth/login status=401 method=POST
+2026-04-06T18:48:14.617Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:14.735Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:14.846Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:14.976Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:15.100Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:15.219Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:15.327Z event=FAILED_LOGIN ip=10.0.0.2 user=john path=/auth/login status=401 method=POST
+2026-04-06T18:48:15.435Z event=FAILED_LOGIN ip=10.0.0.2 user=maria path=/auth/login status=401 method=POST
+2026-04-06T18:48:15.546Z event=FAILED_LOGIN ip=10.0.0.2 user=test path=/auth/login status=401 method=POST
+2026-04-06T18:48:15.658Z event=FAILED_LOGIN ip=10.0.0.2 user=sysadmin path=/auth/login status=401 method=POST
+2026-04-06T18:48:15.779Z event=FAILED_LOGIN ip=10.0.0.2 user=root path=/auth/login status=401 method=POST
+2026-04-06T18:48:15.891Z event=FAILED_LOGIN ip=10.0.0.2 user=user1 path=/auth/login status=401 method=POST
+2026-04-06T18:48:15.999Z event=FAILED_LOGIN ip=10.0.0.2 user=guest path=/auth/login status=401 method=POST
+2026-04-06T18:48:16.108Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:16.217Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:16.327Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:16.436Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:16.543Z event=LOGIN_SUCCESS ip=10.0.0.3 user=admin path=/auth/login status=200 method=POST
+2026-04-06T18:48:16.551Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:16.608Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:16.667Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:16.729Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:16.792Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:16.855Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:16.916Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:16.979Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:17.041Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:17.105Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:17.168Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:17.233Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:17.295Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:17.356Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:17.418Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:33.290Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:33.430Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:33.561Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:33.673Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:33.791Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:33.906Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:34.012Z event=FAILED_LOGIN ip=10.0.0.2 user=john path=/auth/login status=401 method=POST
+2026-04-06T18:48:34.122Z event=FAILED_LOGIN ip=10.0.0.2 user=maria path=/auth/login status=401 method=POST
+2026-04-06T18:48:34.293Z event=FAILED_LOGIN ip=10.0.0.2 user=test path=/auth/login status=401 method=POST
+2026-04-06T18:48:34.413Z event=FAILED_LOGIN ip=10.0.0.2 user=sysadmin path=/auth/login status=401 method=POST
+2026-04-06T18:48:34.526Z event=FAILED_LOGIN ip=10.0.0.2 user=root path=/auth/login status=401 method=POST
+2026-04-06T18:48:34.646Z event=FAILED_LOGIN ip=10.0.0.2 user=user1 path=/auth/login status=401 method=POST
+2026-04-06T18:48:34.760Z event=FAILED_LOGIN ip=10.0.0.2 user=guest path=/auth/login status=401 method=POST
+2026-04-06T18:48:34.871Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:34.978Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:35.090Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:35.198Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:35.306Z event=LOGIN_SUCCESS ip=10.0.0.3 user=admin path=/auth/login status=200 method=POST
+2026-04-06T18:48:35.309Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.370Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.433Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.492Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.556Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.622Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.697Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.757Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.825Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.881Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:35.946Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:36.010Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:36.073Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:36.131Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:36.192Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:52.561Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:52.679Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:52.789Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:52.899Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:53.009Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:53.119Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:53.226Z event=FAILED_LOGIN ip=10.0.0.2 user=john path=/auth/login status=401 method=POST
+2026-04-06T18:48:53.338Z event=FAILED_LOGIN ip=10.0.0.2 user=maria path=/auth/login status=401 method=POST
+2026-04-06T18:48:53.444Z event=FAILED_LOGIN ip=10.0.0.2 user=test path=/auth/login status=401 method=POST
+2026-04-06T18:48:53.554Z event=FAILED_LOGIN ip=10.0.0.2 user=sysadmin path=/auth/login status=401 method=POST
+2026-04-06T18:48:53.664Z event=FAILED_LOGIN ip=10.0.0.2 user=root path=/auth/login status=401 method=POST
+2026-04-06T18:48:53.776Z event=FAILED_LOGIN ip=10.0.0.2 user=user1 path=/auth/login status=401 method=POST
+2026-04-06T18:48:53.883Z event=FAILED_LOGIN ip=10.0.0.2 user=guest path=/auth/login status=401 method=POST
+2026-04-06T18:48:54.006Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:54.126Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:54.241Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:54.357Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:48:54.476Z event=LOGIN_SUCCESS ip=10.0.0.3 user=admin path=/auth/login status=200 method=POST
+2026-04-06T18:48:54.480Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:54.537Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:54.597Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:54.659Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:54.723Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:54.786Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:54.847Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:54.908Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:54.970Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:55.033Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:55.093Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:55.155Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:55.226Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:55.281Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:48:55.344Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:18.052Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:18.186Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:18.308Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:18.428Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:18.536Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:18.650Z event=FAILED_LOGIN ip=10.0.0.1 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:18.772Z event=FAILED_LOGIN ip=10.0.0.2 user=john path=/auth/login status=401 method=POST
+2026-04-06T18:49:18.969Z event=FAILED_LOGIN ip=10.0.0.2 user=maria path=/auth/login status=401 method=POST
+2026-04-06T18:49:19.085Z event=FAILED_LOGIN ip=10.0.0.2 user=test path=/auth/login status=401 method=POST
+2026-04-06T18:49:19.217Z event=FAILED_LOGIN ip=10.0.0.2 user=sysadmin path=/auth/login status=401 method=POST
+2026-04-06T18:49:19.334Z event=FAILED_LOGIN ip=10.0.0.2 user=root path=/auth/login status=401 method=POST
+2026-04-06T18:49:19.441Z event=FAILED_LOGIN ip=10.0.0.2 user=user1 path=/auth/login status=401 method=POST
+2026-04-06T18:49:19.569Z event=FAILED_LOGIN ip=10.0.0.2 user=guest path=/auth/login status=401 method=POST
+2026-04-06T18:49:19.692Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:19.798Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:19.909Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:20.018Z event=FAILED_LOGIN ip=10.0.0.3 user=admin path=/auth/login status=401 method=POST
+2026-04-06T18:49:20.126Z event=LOGIN_SUCCESS ip=10.0.0.3 user=admin path=/auth/login status=200 method=POST
+2026-04-06T18:49:20.131Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.187Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.250Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.311Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.373Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.434Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.527Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.590Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.653Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.716Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.779Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.840Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.902Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:20.965Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
+2026-04-06T18:49:21.026Z event=REQUEST ip=10.0.0.4 path=/admin status=403 method=GET
