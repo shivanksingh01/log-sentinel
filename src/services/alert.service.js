@@ -2,6 +2,8 @@ const Alert = require('../models/Alert');
 const logger = require('../config/logger');
 const statsService = require('./stats.service');
 const sseService = require('./sse.service');
+const fileStoreService = require('../persistence/fileStore.service');
+const notificationService = require('../notifications/notification.service');
 
 class AlertService {
     constructor() {
@@ -58,6 +60,17 @@ class AlertService {
 
         // Broadcast alert live via SSE
         sseService.broadcastAlert(alert);
+
+        // -- Add Step 6 Integrations --
+        // Persist alert (non-blocking)
+        fileStoreService.saveAlert(alert).catch(err => {
+            logger.error(`[ALERT] file storage failed: ${err.message}`);
+        });
+
+        // Send notifications (non-blocking)
+        notificationService.notify(alert).catch(err => {
+            logger.error(`[ALERT] notification failed: ${err.message}`);
+        });
 
         return alert;
     }

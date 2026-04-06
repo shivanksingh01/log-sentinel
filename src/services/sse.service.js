@@ -28,6 +28,10 @@ class SSEService {
         this.clients.forEach((clientRes, clientId) => {
             try {
                 clientRes.write(payload);
+                // Specifically force the Express 'compression' middleware to flush buffers
+                if (typeof clientRes.flush === 'function') {
+                    clientRes.flush();
+                }
             } catch (err) {
                 logger.error(`[SSE] Failed to broadcast to client ${clientId}: ${err.message}`);
                 this.removeClient(clientId);
@@ -42,6 +46,9 @@ class SSEService {
         this.clients.forEach(clientRes => {
             try {
                 clientRes.write(payload);
+                if (typeof clientRes.flush === 'function') {
+                    clientRes.flush();
+                }
             } catch (err) {
                 // Ignore errors for heartbeat, rely on 'close' event from request to remove clients
             }

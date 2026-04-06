@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "aa123b32-cd23-4567-89ab-cdef01234567",
+		"name": "Log Sentinel API",
+		"description": "Postman collection for the Log Sentinel Intrusion Detection System. Includes API endpoints for log analysis, alerts, SSE streaming, and auxiliary application mocks.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "Check Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"health"
+							]
+						},
+						"description": "Basic server health check. Returns uptime and current timestamp."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alerts & Detection",
+			"item": [
+				{
+					"name": "Get All Alerts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/alerts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts"
+							]
+						},
+						"description": "Retrieve all generated intrusion alerts."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Latest Alerts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/alerts/latest",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								"latest"
+							]
+						},
+						"description": "Fetch the 10 most recent generated alerts in descending order."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Alerts Summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/alerts/summary",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								"summary"
+							]
+						},
+						"description": "Retrieve statistical counts of alerts categorized by Type and Severity."
+					},
+					"response": []
+				},
+				{
+					"name": "Real-time Stream (SSE)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/alerts/stream",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								"stream"
+							]
+						},
+						"description": "Connect to the Server-Sent Events stream to receive live alert data pushes."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stats",
+			"item": [
+				{
+					"name": "System Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/stats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stats"
+							]
+						},
+						"description": "Returns processing statistics including bytes processed, lines parsed, and alerts created vs suppressed."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "App Simulators (Demo Endpoints)",
+			"item": [
+				{
+					"name": "Login (Trigger BRUTE_FORCE/CREDENTIAL_STUFFING)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"wrongpassword\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Attempt authentication. By intentionally failing, you trigger LogSentinel's Brute Force or Credential Stuffing rules."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products (Trigger REQUEST)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						},
+						"description": "Fetch available products."
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Area (Trigger FORBIDDEN_ACCESS)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin"
+							]
+						},
+						"description": "Attempt to access the protected admin area. Always returns 403, useful for triggering suspicious access alerts in LogSentinel."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}
