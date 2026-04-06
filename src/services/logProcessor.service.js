@@ -1,10 +1,10 @@
 const logger = require('../config/logger');
+const parserService = require('./parser.service');
+const statsService = require('./stats.service');
+const util = require('util');
 
 /**
  * Process a raw log line detected by the watcher.
- * 
- * This is a placeholder — Step 3 will replace the internals
- * with actual parsing + normalization into event objects.
  * 
  * @param {string} line - A single raw log line from app.log
  */
@@ -13,7 +13,15 @@ const processRawLogLine = (line) => {
         return; // skip blank lines
     }
 
-    logger.info(`[PROCESSOR] Raw log line received: ${line.trim()}`);
+    const parsedEvent = parserService.parseLogLine(line);
+
+    if (parsedEvent) {
+        statsService.incrementLogsProcessed();
+        logger.info(`[PARSER] Parsed event: \n${util.inspect(parsedEvent, { depth: null, colors: false })}`);
+    } else {
+        statsService.incrementParseErrors();
+        logger.warn(`[PARSER][WARN] Failed to parse line: ${line.trim()}`);
+    }
 };
 
 module.exports = {
