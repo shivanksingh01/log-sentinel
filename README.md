@@ -43,13 +43,20 @@ Docker will automatically handle all dependencies, isolate the environment, and 
    ```
 5. **Start the Scanner:** (This mounts the `logs` folder so the scanner can read files dropped into it)
    
-   *If using Git Bash / Linux / macOS:*
+   *If using Windows PowerShell (Recommended for Windows):*
+   ```powershell
+   docker run -p 8080:8080 -v "${PWD}\logs:/logs" intrusion-detector
+   ```
+
+   *If using Git Bash on Windows:*  
+   *(⚠️ Warning: Git Bash mangles Docker volume paths by default. You MUST prefix the command exactly as follows so it binds your folder correctly!)*
+   ```bash
+   MSYS_NO_PATHCONV=1 docker run -p 8080:8080 -v "$(pwd)/logs:/logs" intrusion-detector
+   ```
+
+   *If using macOS / Linux:*
    ```bash
    docker run -p 8080:8080 -v "$(pwd)/logs:/logs" intrusion-detector
-   ```
-   *If using Windows PowerShell:*
-   ```powershell
-   docker run -p 8080:8080 -v "${PWD}/logs:/logs" intrusion-detector
    ```
 
 **What exactly is happening now?** 

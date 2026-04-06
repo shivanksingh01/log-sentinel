@@ -26,7 +26,12 @@ const evaluate = (event, stateService) => {
     if (!['GET', 'POST', 'PUT', 'DELETE', 'UNKNOWN'].includes(event.method)) return null;
 
     const { cooldownSec } = config.sqliProbe;
-    const pathDecoded = decodeURIComponent(event.path);
+    let pathDecoded = event.path;
+    try {
+        pathDecoded = decodeURIComponent(event.path);
+    } catch (e) {
+        // Ignored: Malformed URI components shouldn't bypass detection
+    }
 
     const matched = SQLI_PATTERNS.some(p => p.test(pathDecoded) || p.test(event.path));
     if (!matched) return null;

@@ -16,7 +16,12 @@ const evaluate = (event, stateService) => {
     if (!event.path || !event.ip) return null;
 
     const { cooldownSec } = config.pathTraversal;
-    const pathDecoded = decodeURIComponent(event.path);
+    let pathDecoded = event.path;
+    try {
+        pathDecoded = decodeURIComponent(event.path);
+    } catch (e) {
+        // Ignored: Malformed URI components shouldn't bypass detection
+    }
 
     const matched = TRAVERSAL_PATTERNS.some(p => p.test(pathDecoded) || p.test(event.path));
     if (!matched) return null;
