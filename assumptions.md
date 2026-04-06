@@ -43,3 +43,4 @@ This document captures the explicit assumptions made during the design and imple
 15. **Out of scope**: User authentication for the alert API itself, distributed multi-node state synchronization.
 16. **Out of scope**: Real-time agent deployment, eBPF, syslog integration, SIEM forwarding. These are `todo.md` items.
 17. Application failures (e.g., malformed log line, missing properties) are localized and caught cleanly; they will never crash the central parser/ingestion loop.
+18. **Push Notifications**: Email notifications are handled natively via the Resend API. It is assumed the `RESEND_API_KEY` and `EMAIL_FROM` are pre-provisioned for the assignment's operational scope, requiring only the `EMAIL_TO` to be configured by the user.

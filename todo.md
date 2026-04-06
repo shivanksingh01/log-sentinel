@@ -23,11 +23,12 @@ Future improvements that were not implemented within the time-box of this assign
 
 ---
 
-## Observability
+## Observability & Notifications
 
 - [ ] **Structured alert schema versioning** — Add a `schemaVersion` field to persisted alerts to handle future migrations.
 - [ ] **Prometheus `/metrics` endpoint** — Export alert counts, suppression rates, and detection latency as Prometheus counters for Grafana dashboards.
 - [ ] **Distributed tracing** — Add `x-request-id` correlation across the ingestion → detection → alert pipeline.
+- [ ] **Alternative Notification Channels** — Extend the notification service beyond the current Resend API (Email) to support native Slack Webhooks, Discord, or Twilio SMS for immediate paging.
 
 ---
 

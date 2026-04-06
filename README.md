@@ -106,16 +106,19 @@ data: {"id":"alert_001","type":"SQL_INJECTION_PROBE","severity":"HIGH","ip":"5.5
 
 ---
 
-## 📧 When are Emails Triggered?
+## 📧 Live Email Notifications (Powered by Resend)
 
-Log Sentinel does not spam your inbox for every minor anomaly. Emails are simulated/triggered exclusively under **HIGH severity** conditions.
+Log Sentinel does not spam your inbox for every minor anomaly. Emails are forcefully dispatched via the **Resend API** exclusively under **HIGH severity** conditions.
 
 **An Email is dispatched immediately when:**
 1. A **Signature Attack** is detected (e.g., SQL Injection, Path Traversal). Let's say an attacker tries to access `/etc/passwd`.
 2. A **Behavioral Escalation** occurs. For example, if an attacker brute forces an account (`MEDIUM` severity) and then suddenly logs in successfully. This escalates to a `POSSIBLE_COMPROMISE` (`HIGH` severity).
 3. A **Malicious Scanner** (like Nikto or Dirbuster) is detected rapidly probing your critical paths.
 
-*Note: In this assignment, the email is logged to the console safely (`[EMAIL] Sent HIGH severity alert...`) rather than actually hitting an external SMTP server.*
+> **⚠️ Setup Requirement:**
+> To receive these actual emails, you must update the `EMAIL_TO` variable in your `.env` file to your personal email address. 
+> 
+> ***DO NOT touch `RESEND_API_KEY` or `EMAIL_FROM`!*** I have already provisioned a secure, active API key for this assignment mapped to the `no-reply@infiniaiengine.com` domain.
 
 ---
 
